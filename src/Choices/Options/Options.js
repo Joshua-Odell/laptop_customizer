@@ -8,6 +8,7 @@ const USCurrencyFormat = new Intl.NumberFormat('en-US', {
 
 class Options extends Component {
     features = Object.keys(this.props.features).map((feature, idx) => {
+        console.log(this.props)
         options = this.props.features[feature].map(item => {
             const itemHash = slugify(JSON.stringify(item));
             return ( //this is the item choice buttons. they are dependant on the constants above
