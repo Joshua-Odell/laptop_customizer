@@ -6,9 +6,11 @@ const USCurrencyFormat = new Intl.NumberFormat('en-US', {
     currency: 'USD'
   });
 
+console.log(this)//returning undefined
+
 class Options extends Component {
-    features = Object.keys(this.props.features).map((feature, idx) => {
-         this.props.features[feature].map(item => {
+    optionsCalculator(){
+        this.props.features[this.props.feature].map(item => {
             const itemHash = slugify(JSON.stringify(item));
             return ( //this is the item choice buttons. they are dependant on the constants above
             <div key={itemHash} className="feature__item">
@@ -16,9 +18,9 @@ class Options extends Component {
                 type="radio"
                 id={itemHash}
                 className="feature__option"
-                name={slugify(feature)}
-                checked={item.name === this.state.selected[feature].name}
-                onChange={e => this.updateFeature(feature, item)}
+                name={slugify(this.props.feature)}
+                checked={item.name === this.state.selected[this.props.feature].name}
+                onChange={e => this.updateFeature(this.props.feature, item)}
                 />
                 <label htmlFor={itemHash} className="feature__label">
                 {item.name} ({USCurrencyFormat.format(item.cost)})
@@ -26,7 +28,12 @@ class Options extends Component {
             </div>
             );
         });
-    });
+    }
+    render(){ //no direct return causing an error
+    //features = Object.keys(this.props.features).map((feature, idx) => { Commented out because of error not returning
+         return(optionsCalculator())
+    //})
+    }
 }
 
 export default Options;

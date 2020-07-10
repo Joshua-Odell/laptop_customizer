@@ -5,21 +5,28 @@ const USCurrencyFormat = new Intl.NumberFormat('en-US', {
     currency: 'USD'
   });
 
-class Recipt extends Component {
-    summary = Object.keys(this.state.selected).map((feature, idx) => {
-        const featureHash = feature + '-' + idx;
-        const selectedOption = this.state.selected[feature];
-  
-        return (
-          <div className="summary__option" key={featureHash}>
-            <div className="summary__option__label">{feature} </div>
-            <div className="summary__option__value">{selectedOption.name}</div>
-            <div className="summary__option__cost">
-              {USCurrencyFormat.format(selectedOption.cost)}
-            </div>
-          </div>
-        );
-      });
-}
+console.log(this)//returning undefined
 
+class Recipt extends Component {
+    reciptCalculator(selected){
+        Object.keys(selected).map((feature, idx) => {
+            const featureHash = feature + '-' + idx;
+            const selectedOption = this.state.selected[feature];
+      
+            return (
+              <div className="summary__option" key={featureHash}>
+                <div className="summary__option__label">{feature} </div>
+                <div className="summary__option__value">{selectedOption.name}</div>
+                <div className="summary__option__cost">
+                  {USCurrencyFormat.format(selectedOption.cost)}
+                </div>
+              </div>
+            );
+          });
+        }
+
+    render() { 
+        return (reciptCalculator(this.props.selected)) //I am getting a not defined error 
+    }        
+}
 export default Recipt;
