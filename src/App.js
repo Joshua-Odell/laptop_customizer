@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import Choices from './Choices/Choices';
+import Options from './Choices/Options/Options';
 
 // Normalizes string as a slug - a string that is safe to use
 // in both URLs and html attributes
 import slugify from 'slugify';
 
 import './App.css';
+
 
 // This object will allow us to
 // easily convert numbers into US dollar values
@@ -43,9 +46,33 @@ class App extends Component {
     });
   };
 
+  //feature is the props passed into App
   render() {
-      
+
+    //This is the recipt list section
+    const summary = Object.keys(this.state.selected).map((feature, idx) => {
+      const featureHash = feature + '-' + idx;
+      const selectedOption = this.state.selected[feature];
+
       return (
+        <div className="summary__option" key={featureHash}>
+          <div className="summary__option__label">{feature} </div>
+          <div className="summary__option__value">{selectedOption.name}</div>
+          <div className="summary__option__cost">
+            {USCurrencyFormat.format(selectedOption.cost)}
+          </div>
+        </div>
+      );
+    });
+
+
+
+    const total = Object.keys(this.state.selected).reduce(
+      (acc, curr) => acc + this.state.selected[curr].cost,
+      0
+    );
+
+    return (
       <div className="App">
         <header>
           <h1>ELF Computing | Laptops</h1>
@@ -53,11 +80,11 @@ class App extends Component {
         <main>
           <form className="main__form">
             <h2>Customize your laptop</h2>
-            {features}
+            <Choices /> 
           </form>
           <section className="main__summary">
             <h2>Your cart</h2>
-            {summary} 
+            {summary}
             <div className="summary__total">
               <div className="summary__total__label">Total</div>
               <div className="summary__total__value">
