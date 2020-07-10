@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 
+const USCurrencyFormat = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  });
+
 class Recipt extends Component {
     summary = Object.keys(this.state.selected).map((feature, idx) => {
         const featureHash = feature + '-' + idx;

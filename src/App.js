@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import Choices from './Choices/Choices';
-import Options from './Choices/Options/Options';
 import Recipt from './Recipt/Recipt'
 
-// Normalizes string as a slug - a string that is safe to use
-// in both URLs and html attributes
-import slugify from 'slugify';
 
 import './App.css';
 
@@ -67,7 +63,8 @@ class App extends Component {
         <main>
           <form className="main__form">
             <h2>Customize your laptop</h2>
-            <Choices /> 
+            <Choices 
+            features={this.props.features}/> 
           </form>
           <section className="main__summary">
             <h2>Your cart</h2>
